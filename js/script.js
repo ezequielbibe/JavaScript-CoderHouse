@@ -20,7 +20,6 @@ function verificarUsuario() {
         }
     }
 }
-verificarUsuario();
 
 class Productos {
     constructor(nombre, marca, precio, caracteristicas, stock) {
@@ -42,7 +41,7 @@ class Productos {
 const producto1 = new Productos("Placa De Video Sapphire Pulse Rx 6500 Xt Oc 4gb Gddr6 Radeon", "AMD", 52000, "La tarjeta gráfica SAPPHIRE PULSE AMD Radeon RX 6500 XT funciona con la potente tecnología de enfriamiento Dual-X junto con el control inteligente del ventilador para mantener bajas las temperaturas y el ruido del ventilador. El diseño refinado de PCB ofrece un rendimiento estable, confiable y constante, lo que reduce de manera eficiente la temperatura de la PCB y el ruido de la señal de los componentes.", "5");
 
 const productosEnVenta = [];
-    productosEnVenta.push(producto1);
+productosEnVenta.push(producto1);
 
 function agregandoProducto() {
     let nombreNew = prompt("Ingrese el nombre del producto");
@@ -56,3 +55,25 @@ function agregandoProducto() {
 
     productosEnVenta.push(productoNew);
 }
+let resultadovich = [];
+
+function buscadorDeProductos(){
+    let busqueda = prompt("Busqueda de producto");
+
+    if(productosEnVenta.some((el) => el.nombre.toUpperCase().includes(busqueda.toUpperCase()))) {
+        let resultado = productosEnVenta.filter((el) => el.nombre.toUpperCase().includes(busqueda.toUpperCase()));
+        for (const result of resultado) {
+           resultadovich = resultadovich + `• ${result.nombre} - $${result.precio} \n`;
+        }
+        alert(`Resultado de tu busqueda:\n ${resultadovich}`);
+    } else {
+        alert("No pudimos encontrar nada en la web :(");
+    }
+}
+
+alert("Sitema para verificar usuario");
+verificarUsuario();
+alert("Sistema para agregar un producto a la venta")
+agregandoProducto();
+alert("Sistema de busqueda de productos en venta");
+buscadorDeProductos();
