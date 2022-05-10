@@ -16,6 +16,8 @@ function verificarUsuario() {
             }
         } else {
             alert(`Hola ${nombre}, bienvenido a BahiaNET`);
+            let botones = document.getElementById("botones");
+            botones.remove();
             break;
         }
     }
@@ -38,10 +40,16 @@ class Productos {
     }
 }
 
-const producto1 = new Productos("Placa De Video Sapphire Pulse Rx 6500 Xt Oc 4gb Gddr6 Radeon", "AMD", 52000, "La tarjeta gráfica SAPPHIRE PULSE AMD Radeon RX 6500 XT funciona con la potente tecnología de enfriamiento Dual-X junto con el control inteligente del ventilador para mantener bajas las temperaturas y el ruido del ventilador. El diseño refinado de PCB ofrece un rendimiento estable, confiable y constante, lo que reduce de manera eficiente la temperatura de la PCB y el ruido de la señal de los componentes.", "5");
-
+const producto1 = new Productos("Placa De Video Rx 6500 Xt Oc 4gb Gddr6 Radeon", "AMD", 52000, "La tarjeta gráfica SAPPHIRE PULSE AMD Radeon RX 6500 XT funciona con la potente tecnología de enfriamiento Dual-X junto con el control inteligente del ventilador para mantener bajas las temperaturas y el ruido del ventilador. El diseño refinado de PCB ofrece un rendimiento estable, confiable y constante, lo que reduce de manera eficiente la temperatura de la PCB y el ruido de la señal de los componentes.", "5");
+const producto2 = new Productos("Procesador Intel Core i3-10100F", "Intel", 13500, "Microprocesador Intel de 10ma generacion, con 4 núcleos de CPU, y una frecuencia maxima de 4.3GHz", 4);
+const producto3 = new Productos("Procesador Intel Core i3-10100", "Intel", 20000, "Microprocesador Intel de 10ma generacion, con 4 núcleos de CPU, y una frecuencia maxima de 4.3GHz. Cuenta con graficas integradas UHD Graphics 630", "5");
+const producto4 = new Productos("Procesador Intel Core i5-10400F", "Intel", 23500, "Microprocesador Intel DDR4 de 10ma generacion con 6 núcleos y una frecuencia maxima de 4.3GHz", "2")
+const producto5 = new Productos("Procesador Intel Core i5-10400F", "Intel", 27000, "Microprocesador Intel DDR4 de 10ma generacion con 6 núcleos y una frecuencia maxima de 4.3GHz con tarjeta grafica intregrada UHD Graphics 630", "3")
+const producto6 = new Productos("Placa de video Nvidia Asus Phoenix GeForce GTX1650", "Nvidia", 48000, "Tarjeta grafica Nvidia GDDR6, con tamaño de memoria de 4GB con conectividad HDMI 2.0b, DL-DVI-D, DisplayPort 1.4", "1");
+const producto7 = new Productos("Placa de video Nvida GeForce GTX1660 SUPER", "Nvidia", 80000, "Tarjeta Grafica Nvidia GDDR6, con tamaño de memoria de 6GB con conectividad DisplayPort 1.4, HDMI 2.0b", "2");
 const productosEnVenta = [];
-productosEnVenta.push(producto1);
+
+productosEnVenta.push(producto1, producto2, producto3, producto4, producto5, producto6, producto7);
 
 function agregandoProducto() {
     let nombreNew = prompt("Ingrese el nombre del producto");
@@ -71,7 +79,24 @@ function buscadorDeProductos(){
     }
 }
 
-alert("Sitema para verificar usuario");
+for(const producto of productosEnVenta) {
+    let stock;
+    if(producto.stock < 1) {
+        stock = "Sin STOCK";
+    } else {
+        stock = "Stock Disponible"
+    }
+    let listado = document.createElement("div");
+    listado.innerHTML =`<h3>${producto.nombre}</h3>
+                        <h4>Marca: ${producto.marca}</h4>
+                        <p>Precio: ${producto.precio}</p>
+                        <p>Caracteristicas: ${producto.caracteristicas}</p>
+                        <p>Stock: ${stock}
+                        `
+    document.getElementById("main").append(listado);
+}
+
+alert("Sistema para verificar usuario");
 verificarUsuario();
 alert("Sistema para agregar un producto a la venta")
 agregandoProducto();
