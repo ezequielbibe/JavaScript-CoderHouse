@@ -23,55 +23,61 @@ function verificarUsuario() {
     }
 }
 
-class Productos {
-    constructor(nombre, marca, precio, caracteristicas, stock) {
-        this.nombre = nombre;
+class Autos {
+    constructor(marca, modelo, anio, precio, combustible, caracteristicas, kilometraje, id) {
         this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
         this.precio = precio;
+        this.combustible = combustible;
         this.caracteristicas = caracteristicas;
-        this.stock = stock;
+        this.kilometraje = kilometraje;
+        this.disponible = "Disponible";
+        this.id = id;
     }
 
     vender(){
-        this.stock = this.stock - 1;
-    }
-    ingresoStock(cantidad){
-        this.stock = this.stock + parseInt(cantidad)
+        this.disponible = "Vendido";
     }
 }
 
-const producto1 = new Productos("Placa De Video Rx 6500 Xt Oc 4gb Gddr6 Radeon", "AMD", 52000, "La tarjeta gráfica SAPPHIRE PULSE AMD Radeon RX 6500 XT funciona con la potente tecnología de enfriamiento Dual-X junto con el control inteligente del ventilador para mantener bajas las temperaturas y el ruido del ventilador. El diseño refinado de PCB ofrece un rendimiento estable, confiable y constante, lo que reduce de manera eficiente la temperatura de la PCB y el ruido de la señal de los componentes.", "5");
-const producto2 = new Productos("Procesador Intel Core i3-10100F", "Intel", 13500, "Microprocesador Intel de 10ma generacion, con 4 núcleos de CPU, y una frecuencia maxima de 4.3GHz", 4);
-const producto3 = new Productos("Procesador Intel Core i3-10100", "Intel", 20000, "Microprocesador Intel de 10ma generacion, con 4 núcleos de CPU, y una frecuencia maxima de 4.3GHz. Cuenta con graficas integradas UHD Graphics 630", "5");
-const producto4 = new Productos("Procesador Intel Core i5-10400F", "Intel", 23500, "Microprocesador Intel DDR4 de 10ma generacion con 6 núcleos y una frecuencia maxima de 4.3GHz", "2")
-const producto5 = new Productos("Procesador Intel Core i5-10400F", "Intel", 27000, "Microprocesador Intel DDR4 de 10ma generacion con 6 núcleos y una frecuencia maxima de 4.3GHz con tarjeta grafica intregrada UHD Graphics 630", "3")
-const producto6 = new Productos("Placa de video Nvidia Asus Phoenix GeForce GTX1650", "Nvidia", 48000, "Tarjeta grafica Nvidia GDDR6, con tamaño de memoria de 4GB con conectividad HDMI 2.0b, DL-DVI-D, DisplayPort 1.4", "1");
-const producto7 = new Productos("Placa de video Nvida GeForce GTX1660 SUPER", "Nvidia", 80000, "Tarjeta Grafica Nvidia GDDR6, con tamaño de memoria de 6GB con conectividad DisplayPort 1.4, HDMI 2.0b", "2");
-const productosEnVenta = [];
+const auto1 = new Autos("Fiat", "Palio fire top", 2006, 890000, "Nafta y GNC", "Motor 1.4, cuenta con alarma, cierre centralizado, calefacción y aire acondicionado.", 190000, 1);
+const auto2 = new Autos("Suzuki", "Fun", 2005, "Nafta", "Excelente estando general, cubiertas nuevas, alarma y aire acondicionado.", 170000, 2);
+const auto3 = new Autos("volkswagen", "Gol Trend", 2022, 3000000, "Nafta", "Motor 1.6, full, cuenta con todo ultima gen para un confort especial, dirreción hidraulica, seguro contra todo riesgo.", 0, 3);
+const auto4 = new Autos("Volkswagen", "Bora TDI", 2011, 1300000, "Diesel", "Cuenta con aire acondicionado, alza cristales, espejos electricos, airbag, freno a disco, y cubiertas en buen estado.", 130000, 4);
+const auto5 = new Autos("Volkswagen", "Vento TDI", 2006, 1700000, "Diesel", "Motor 1.9 diesel, tapizados de cuero, climatizador bizona, pantalla 10pulgadas con android", 150000, 5);
+const auto6 = new Autos("Fiat", "Mobi easy", 2017, 1950000, "Nafta", "Motor 1.4, full, excelente estado general transmision manual", 60000, 6);
+const auto7 = new Autos("Fiat", "Punto attractive", 2011, 1600000, "Nafta", "Motor 1.4 5 puertas, con cierre centralizado, levanta vidrios, aire acondicionado, airbag, faros antiniebla, dirección asistida.", 162000, 7);
+const auto8 = new Autos("Ford", "Ranger", 2013, 3400000, "Diesel", "Camioneta 4x2 safety, con tapizados de cuero, pantalla tactil 10pulgadas, excelente estado de cubiertas, transmision manual", 136000, 8);
+const auto9 = new Autos("Fiat", "Cronos", 2022, 3500000, "Nafta", "Motor 1.3, cuenta con cierre centralizado, alza cristales electricos, espejos electricos, pantalla tactil", 0, 9);
 
-productosEnVenta.push(producto1, producto2, producto3, producto4, producto5, producto6, producto7);
+const autosEnVenta = [];
+
+autosEnVenta.push(auto1, auto2, auto3, auto4, auto5, auto6, auto7, auto8, auto9);
 
 function agregandoProducto() {
-    let nombreNew = prompt("Ingrese el nombre del producto");
-    let marcaNew = prompt("Ingrese la marca del producto");
-    let precioNew = prompt("Ingrese el precio del producto");
-    let caracteristicasNew = prompt("Ingrese las caracteristicas del producto");
-    let stockNew = prompt("Ingrese el stock del producto");
+    let marca = prompt("Ingrese la marca del vehiculo");
+    let nombre = prompt("Ingrese el nombre del vehiculo");
+    let anio = prompt("Ingrese el año del vehiculo");
+    let precio = prompt("Ingrese el precio del vehiculo");
+    let combustible = prompt("Ingrese el cumbustible del vehiculo");
+    let caracteristicas = prompt("Ingrese las caracteristicas del vehiculo");
+    let kilometraje = prompt("Ingrese el kilometraje del vehiculo");
 
-    const productoNew = new Productos(nombreNew, marcaNew, precioNew, caracteristicasNew, stockNew);
-    console.log(productoNew);
+    const autoNew = new Autos(marca, nombre, anio, precio, combustible, caracteristicas, kilometraje);
+    console.log(autoNew);
 
-    productosEnVenta.push(productoNew);
+    autosEnVenta.push(autoNew);
 }
-let resultadovich = [];
 
 function buscadorDeProductos(){
-    let busqueda = prompt("Busqueda de producto");
+    let resultadovich = [];
+    let busqueda = prompt('Ingrese el modelo de auto que busca ej: fiat "PALIO"')
 
-    if(productosEnVenta.some((el) => el.nombre.toUpperCase().includes(busqueda.toUpperCase()))) {
-        let resultado = productosEnVenta.filter((el) => el.nombre.toUpperCase().includes(busqueda.toUpperCase()));
+    if(autosEnVenta.some((el) => el.modelo.toUpperCase().includes(busqueda.toUpperCase()))) {
+        let resultado = autosEnVenta.filter((el) => el.modelo.toUpperCase().includes(busqueda.toUpperCase()));
         for (const result of resultado) {
-           resultadovich = resultadovich + `• ${result.nombre} - $${result.precio} \n`;
+           resultadovich = resultadovich + `• ${result.modelo} - $${result.precio} \n`;
         }
         alert(`Resultado de tu busqueda:\n ${resultadovich}`);
     } else {
@@ -79,26 +85,58 @@ function buscadorDeProductos(){
     }
 }
 
-for(const producto of productosEnVenta) {
-    let stock;
-    if(producto.stock < 1) {
-        stock = "Sin STOCK";
-    } else {
-        stock = "Stock Disponible"
-    }
+for(const auto of autosEnVenta) {
     let listado = document.createElement("div");
-    listado.innerHTML =`<h3>${producto.nombre}</h3>
-                        <h4>Marca: ${producto.marca}</h4>
-                        <p>Precio: ${producto.precio}</p>
-                        <p>Caracteristicas: ${producto.caracteristicas}</p>
-                        <p>Stock: ${stock}
+    listado.innerHTML =`<h3>${auto.marca} ${auto.modelo}</h3>
+                        <h3>Precio: ${auto.precio}</h3>
+                        <p>Año: ${auto.anio}</p>
+                        <p>Combustible: ${auto.combustible}</p>
+                        <p>Kilometraje: ${auto.kilometraje}</p>
+                        <p>Caracteristicas: ${auto.caracteristicas}</p>
+                        <p>Disponibilidad: ${auto.disponible}</p>
+                        <button id="boton">Consultar financiación</button>
                         `
     document.getElementById("main").append(listado);
 }
 
-alert("Sistema para verificar usuario");
-verificarUsuario();
-alert("Sistema para agregar un producto a la venta")
-agregandoProducto();
-alert("Sistema de busqueda de productos en venta");
-buscadorDeProductos();
+function consultarFinanciacion() {
+    let entrega = parseInt(prompt("Cuanto dinero va a entregar"));
+    let cuotas = parseInt(prompt("En cuantas cuotas queres financiar?(Podes elegir entre 12, 24, 36, 48, 60 y 72)"));
+    let resultado;
+
+    switch(cuotas) {
+        case 12:
+            resultado = ((((this.auto.precio - entrega) * 40)) / 100) / 12;
+            alert(`La financiacíon te quedaria en 12 cuotas de ${resultado}`);
+            break;
+
+        case 24:
+            resultado = ((((this.auto.precio - entrega) * 40)) / 100) / 24;
+            alert(`La financiacíon te quedaria en 24 cuotas de ${resultado}`);
+            break;
+        case 36:
+            resultado = ((((auto.precio - entrega) * 40)) / 100) / 36;
+            alert(`La financiacíon te quedaria en 36 cuotas de ${resultado}`);
+            break;
+        case 48:
+            resultado = ((((auto.precio - entrega) * 40)) / 100) / 48;
+            alert(`La financiacíon te quedaria en 48 cuotas de ${resultado}`);
+            break;
+        case 60:
+            resultado = ((((auto.precio - entrega) * 40)) / 100) / 60;
+            alert(`La financiacíon te quedaria en 60 cuotas de ${resultado}`);
+            break;
+        case 72:
+            resultado = ((((auto.precio - entrega) * 40)) / 100) / 72;
+            alert(`La financiacíon te quedaria en 72 cuotas de ${resultado}`);
+            break;
+        
+    }
+}
+
+let botoness = document.getElementById("ingresar");
+botoness.addEventListener("click", verificarUsuario);
+let btnAgregar = document.getElementById("agregar");
+btnAgregar.addEventListener("click", agregandoProducto);
+let btnBuscar = document.getElementById("buscar");
+btnBuscar.addEventListener("click", buscadorDeProductos);

@@ -109,3 +109,14 @@ body {
     padding: 0 3rem; }
     .footer-icons i:hover {
       color: #c24c4c; }
+
+
+.chau {
+  margin-left: 1rem;
+}
+.hola {
+  border: none;
+  background-color: #c24c4c;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem; }
