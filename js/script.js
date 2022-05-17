@@ -70,12 +70,12 @@ function agregandoProducto() {
     autosEnVenta.push(autoNew);
 }
 
-function buscadorDeProductos(){
+function buscadorDeProductos(e){
     let resultadovich = [];
-    let busqueda = prompt('Ingrese el modelo de auto que busca ej: fiat "PALIO"')
+    e.preventDefault();
 
-    if(autosEnVenta.some((el) => el.modelo.toUpperCase().includes(busqueda.toUpperCase()))) {
-        let resultado = autosEnVenta.filter((el) => el.modelo.toUpperCase().includes(busqueda.toUpperCase()));
+    if(autosEnVenta.some((el) => el.modelo.toUpperCase().includes(input.value.toUpperCase()))) {
+        let resultado = autosEnVenta.filter((el) => el.modelo.toUpperCase().includes(input.value.toUpperCase()));
         for (const result of resultado) {
            resultadovich = resultadovich + `• ${result.modelo} - $${result.precio} \n`;
         }
@@ -85,7 +85,7 @@ function buscadorDeProductos(){
     }
 }
 
-for(const auto of autosEnVenta) {
+/*for(const auto of autosEnVenta) {
     let listado = document.createElement("div");
     listado.innerHTML =`<h3>${auto.marca} ${auto.modelo}</h3>
                         <h3>Precio: ${auto.precio}</h3>
@@ -97,7 +97,7 @@ for(const auto of autosEnVenta) {
                         <button id="boton">Consultar financiación</button>
                         `
     document.getElementById("main").append(listado);
-}
+}*/
 
 function consultarFinanciacion() {
     let entrega = parseInt(prompt("Cuanto dinero va a entregar"));
@@ -133,10 +133,8 @@ function consultarFinanciacion() {
         
     }
 }
-
+let input = document.getElementById("buscador");
+let busqueda = document.getElementById("form");
+busqueda.addEventListener("submit", buscadorDeProductos);
 let botoness = document.getElementById("ingresar");
 botoness.addEventListener("click", verificarUsuario);
-let btnAgregar = document.getElementById("agregar");
-btnAgregar.addEventListener("click", agregandoProducto);
-let btnBuscar = document.getElementById("buscar");
-btnBuscar.addEventListener("click", buscadorDeProductos);

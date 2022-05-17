@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Fonts2-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Computadoras BB</title>
 </head> 
@@ -15,39 +19,46 @@
     <header class="header">
         <div class="header-arriba">
             <div class="header-arriba-logo">
-                <i class="bi bi-joystick"></i>
-                <h1>Bahia<span class="logo">NET</span></h1>
+                <h1>Bahia<span class="logo"> Automotores</span></h1>
+            </div>
+            <div>
+                <form id="form" class="header-arriba-buscador">
+                    <input type="text" id="buscador" placeholder="Buscá el modelo del vehículo..." required>
+                    <input type="submit" id ="btn-buscar" value="Buscar">
+                </form>
             </div>
             <div id="botones" class="header-arriba-botones">
                 <button id="ingresar">Ingresar</button>
                 <button>Registrar</button>
             </div>
-            <div class="chau">
-                <button id="agregar" class="hola">Cargar vehiculos</button>
-                <button id="buscar" class="hola">Buscar vehiculos</button>
-            </div>
         </div>
         <nav class="header-nav">
             <ul>
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
+                <li><a href="#">0km</a></li>
+                <li><a href="#">Usados</a></li>
+                <li><a href="#">¿Quienes somos?</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main">
-        
-    </main>
-    <!-- <main class="main-content">
-        <div class="main-content-box1">
-            <img src="img/banner.jpg" alt="Banner. Placas de video." class="ajuste-img">
+    <main class="main-content">
+        <div id="inicio">
+            <div class="logan">
+                <h2>NO DEJES PASAR EL MOMENTO DE COMPRARTE TU AUTO</h2>
+                <p>o cambiar el que ya tenes!</p>
+            </div>
+            <div class="banner">
+                <img src="./img/banner.png" alt="Nuevo 208" class="img">
+            </div>
         </div>
-        <div class="main-content-box2"></div>
-        <div class="main-content-box3"></div>
-        <div class="main-content-box4"></div>
-        <div class="main-content-box5"></div>
-    </main>  -->
+        <div id="cerokm"></div>
+        <div id="usados"></div>
+        <div id="quienessomos"></div>
+        <div id="contacto"></div>
+    </main>
+
     <footer class="footer">
         <div class="footer-ubicacion">
             <i class="bi bi-geo-alt"></i>
@@ -61,7 +72,6 @@
             <i class="bi bi-facebook"></i>
             <i class="bi bi-whatsapp"></i>
         </div>
-        <button id="boton" class="botoness">hola</button>
     </footer>
 
     <script src="/js/script.js"></script>

@@ -1,5 +1,5 @@
 {
-  "name": "compubb",
+  "name": "javascript-coderhouse",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,11 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "node-sass --include-path scss scss/style.scss css/style.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezequielbibe/JavaScript-CoderHouse.git"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/ezequielbibe/JavaScript-CoderHouse/issues"
+  },
+  "homepage": "https://github.com/ezequielbibe/JavaScript-CoderHouse#readme",
+  "devDependencies": {
     "node-sass": "^7.0.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.16"
   }
 }
