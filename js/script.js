@@ -23,8 +23,8 @@ function verificarUsuario() {
     }
 }
 
-class Autos {
-    constructor(marca, modelo, anio, precio, combustible, caracteristicas, kilometraje, id) {
+class AutosUsados {
+    constructor(marca, modelo, anio, precio, combustible, caracteristicas, kilometraje) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
@@ -33,27 +33,38 @@ class Autos {
         this.caracteristicas = caracteristicas;
         this.kilometraje = kilometraje;
         this.disponible = "Disponible";
-        this.id = id;
+        this.id = autosUsados.length++;
     }
 
     vender(){
         this.disponible = "Vendido";
     }
 }
+class AutosNuevos {
+    constructor(marca, modelo, anio, precio, combustible, caracteristicas, imagen, id) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.precio = precio;
+        this.combustible = combustible;
+        this.caracteristicas = caracteristicas;
+        this.kilometraje = 0;
+        this.disponible = "Disponible";
+        this.id = id;
+        this.imagen = imagen;
+    }
 
-const auto1 = new Autos("Fiat", "Palio fire top", 2006, 890000, "Nafta y GNC", "Motor 1.4, cuenta con alarma, cierre centralizado, calefacción y aire acondicionado.", 190000, 1);
-const auto2 = new Autos("Suzuki", "Fun", 2005, "Nafta", "Excelente estando general, cubiertas nuevas, alarma y aire acondicionado.", 170000, 2);
-const auto3 = new Autos("volkswagen", "Gol Trend", 2022, 3000000, "Nafta", "Motor 1.6, full, cuenta con todo ultima gen para un confort especial, dirreción hidraulica, seguro contra todo riesgo.", 0, 3);
-const auto4 = new Autos("Volkswagen", "Bora TDI", 2011, 1300000, "Diesel", "Cuenta con aire acondicionado, alza cristales, espejos electricos, airbag, freno a disco, y cubiertas en buen estado.", 130000, 4);
-const auto5 = new Autos("Volkswagen", "Vento TDI", 2006, 1700000, "Diesel", "Motor 1.9 diesel, tapizados de cuero, climatizador bizona, pantalla 10pulgadas con android", 150000, 5);
-const auto6 = new Autos("Fiat", "Mobi easy", 2017, 1950000, "Nafta", "Motor 1.4, full, excelente estado general transmision manual", 60000, 6);
-const auto7 = new Autos("Fiat", "Punto attractive", 2011, 1600000, "Nafta", "Motor 1.4 5 puertas, con cierre centralizado, levanta vidrios, aire acondicionado, airbag, faros antiniebla, dirección asistida.", 162000, 7);
-const auto8 = new Autos("Ford", "Ranger", 2013, 3400000, "Diesel", "Camioneta 4x2 safety, con tapizados de cuero, pantalla tactil 10pulgadas, excelente estado de cubiertas, transmision manual", 136000, 8);
-const auto9 = new Autos("Fiat", "Cronos", 2022, 3500000, "Nafta", "Motor 1.3, cuenta con cierre centralizado, alza cristales electricos, espejos electricos, pantalla tactil", 0, 9);
+    vender(){
+        this.disponible = "Vendido";
+    }
+}
+let autosNuevos = [];
+let autosUsados = [];
 
-const autosEnVenta = [];
-
-autosEnVenta.push(auto1, auto2, auto3, auto4, auto5, auto6, auto7, auto8, auto9);
+const auto1 = new AutosNuevos("Volkswagen", "Gol Trend Trendline", 2021, 3500000, "Nafta", "El Gol Trend Trendline cuenta con un motor 1.6, una cilindrada de 1599cc, capacidad de tanque de 55L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", "https://http2.mlstatic.com/D_NQ_NP_770031-MLA43660842672_102020-O.webp", 1);
+const auto2 = new AutosNuevos("Peugeot", "208 Feline Tiptronic", 2022, 4110000, "Nafta", "El 208 Feline Tiptronic cuenta con un motor 1.6, una cilindrada de 1587cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", "https://http2.mlstatic.com/D_NQ_NP_801127-MLA49988347847_052022-O.webp", 2);
+const auto3 = new AutosNuevos("Fiat", "Mobi Easy Pack Top", 2021, 2150000, "Nafta", "El Mobi Easy Pack Top cuenta con un motor 1.0, una cilindrada de 999cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo", "https://http2.mlstatic.com/D_NQ_NP_771948-MLA49791101390_042022-O.webp", 3);
+autosNuevos.push(auto1, auto2, auto3);
 
 function agregandoProducto() {
     let marca = prompt("Ingrese la marca del vehiculo");
@@ -62,12 +73,16 @@ function agregandoProducto() {
     let precio = prompt("Ingrese el precio del vehiculo");
     let combustible = prompt("Ingrese el cumbustible del vehiculo");
     let caracteristicas = prompt("Ingrese las caracteristicas del vehiculo");
-    let kilometraje = prompt("Ingrese el kilometraje del vehiculo");
+    let imagen = prompt("Ingrese la img del vehiculo");
 
-    const autoNew = new Autos(marca, nombre, anio, precio, combustible, caracteristicas, kilometraje);
+    const autoNew = new AutosNuevos(marca, nombre, anio, precio, combustible, caracteristicas, imagen, autosNuevos.length++);
     console.log(autoNew);
 
-    autosEnVenta.push(autoNew);
+    let agora = JSON.parse(localStorage.getItem("autos0km"));
+    agora.push(autoNew);
+    localStorage.setItem("autos0km", JSON.stringify(agora));
+
+    mostrar();
 }
 
 function buscadorDeProductos(e){
@@ -85,56 +100,31 @@ function buscadorDeProductos(e){
     }
 }
 
-/*for(const auto of autosEnVenta) {
-    let listado = document.createElement("div");
-    listado.innerHTML =`<h3>${auto.marca} ${auto.modelo}</h3>
-                        <h3>Precio: ${auto.precio}</h3>
-                        <p>Año: ${auto.anio}</p>
-                        <p>Combustible: ${auto.combustible}</p>
-                        <p>Kilometraje: ${auto.kilometraje}</p>
-                        <p>Caracteristicas: ${auto.caracteristicas}</p>
-                        <p>Disponibilidad: ${auto.disponible}</p>
-                        <button id="boton">Consultar financiación</button>
-                        `
-    document.getElementById("main").append(listado);
-}*/
-
-function consultarFinanciacion() {
-    let entrega = parseInt(prompt("Cuanto dinero va a entregar"));
-    let cuotas = parseInt(prompt("En cuantas cuotas queres financiar?(Podes elegir entre 12, 24, 36, 48, 60 y 72)"));
-    let resultado;
-
-    switch(cuotas) {
-        case 12:
-            resultado = ((((this.auto.precio - entrega) * 40)) / 100) / 12;
-            alert(`La financiacíon te quedaria en 12 cuotas de ${resultado}`);
-            break;
-
-        case 24:
-            resultado = ((((this.auto.precio - entrega) * 40)) / 100) / 24;
-            alert(`La financiacíon te quedaria en 24 cuotas de ${resultado}`);
-            break;
-        case 36:
-            resultado = ((((auto.precio - entrega) * 40)) / 100) / 36;
-            alert(`La financiacíon te quedaria en 36 cuotas de ${resultado}`);
-            break;
-        case 48:
-            resultado = ((((auto.precio - entrega) * 40)) / 100) / 48;
-            alert(`La financiacíon te quedaria en 48 cuotas de ${resultado}`);
-            break;
-        case 60:
-            resultado = ((((auto.precio - entrega) * 40)) / 100) / 60;
-            alert(`La financiacíon te quedaria en 60 cuotas de ${resultado}`);
-            break;
-        case 72:
-            resultado = ((((auto.precio - entrega) * 40)) / 100) / 72;
-            alert(`La financiacíon te quedaria en 72 cuotas de ${resultado}`);
-            break;
-        
-    }
-}
 let input = document.getElementById("buscador");
 let busqueda = document.getElementById("form");
 busqueda.addEventListener("submit", buscadorDeProductos);
 let botoness = document.getElementById("ingresar");
-botoness.addEventListener("click", verificarUsuario);
+botoness.addEventListener("click", agregandoProducto);
+
+
+localStorage.setItem("autos0km", JSON.stringify(autosNuevos));
+function mostrar() {
+    let autosNuevosLS = JSON.parse(localStorage.getItem("autos0km"));
+
+    autosNuevosLS.forEach(auto => {
+        let ceros = document.createElement("div");
+        ceros.innerHTML = `
+                            <div class="ceros-card-img">
+                                <img src="${auto.imagen}" alt="${auto.modelo}">
+                            </div>
+                            <div class="ceros-card-text">
+                                <h3>${auto.marca} ${auto.modelo}</h3>
+                                <p>${auto.caracteristicas}</p>
+                                <button>calcular financiación</button>
+                            </div>`;
+        ceros.className = "ceros-card";
+        document.getElementById("cero").append(ceros);
+    })
+}
+
+mostrar();
