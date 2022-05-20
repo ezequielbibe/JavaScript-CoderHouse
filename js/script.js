@@ -1,28 +1,4 @@
-function verificarUsuario() {
-    let cuenta;
-    let nombre;
-    let password;
-
-    for(i=1; i <= 5; i++) {
-        nombre = prompt("Ingrese su nombre de usuario.");
-        password = prompt("Ingrese su contraseña");
-        cuenta = 5 - i;
-        if(nombre != "CoderHouse" && password != "coder123") {
-            if(cuenta != 0) {
-                alert(`Usuario o contraseña erronea, por favor vuelva a intentarlo. Le quedan ${cuenta} intentos.`);
-            } else {
-                alert(`Te quedaste sin intentos, vuelva a intentarlo mas tarde.`);
-                break
-            }
-        } else {
-            alert(`Hola ${nombre}, bienvenido a BahiaNET`);
-            let botones = document.getElementById("botones");
-            botones.remove();
-            break;
-        }
-    }
-}
-
+//CLASES Y ARREGLOS
 class AutosUsados {
     constructor(marca, modelo, anio, precio, combustible, caracteristicas, kilometraje) {
         this.marca = marca;
@@ -60,11 +36,59 @@ class AutosNuevos {
 }
 let autosNuevos = [];
 let autosUsados = [];
-
+let autosEnVenta = [];
 const auto1 = new AutosNuevos("Volkswagen", "Gol Trend Trendline", 2021, 3500000, "Nafta", "El Gol Trend Trendline cuenta con un motor 1.6, una cilindrada de 1599cc, capacidad de tanque de 55L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", "https://http2.mlstatic.com/D_NQ_NP_770031-MLA43660842672_102020-O.webp", 1);
 const auto2 = new AutosNuevos("Peugeot", "208 Feline Tiptronic", 2022, 4110000, "Nafta", "El 208 Feline Tiptronic cuenta con un motor 1.6, una cilindrada de 1587cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", "https://http2.mlstatic.com/D_NQ_NP_801127-MLA49988347847_052022-O.webp", 2);
 const auto3 = new AutosNuevos("Fiat", "Mobi Easy Pack Top", 2021, 2150000, "Nafta", "El Mobi Easy Pack Top cuenta con un motor 1.0, una cilindrada de 999cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo", "https://http2.mlstatic.com/D_NQ_NP_771948-MLA49791101390_042022-O.webp", 3);
 autosNuevos.push(auto1, auto2, auto3);
+autosEnVenta.push(auto1, auto2, auto3);
+
+
+// FUNCIONES
+
+localStorage.setItem("user1", "coderhouse@hotmail.com");
+localStorage.setItem("passUser1", "coder123");
+let userUno = localStorage.getItem("user1");
+let passUno = localStorage.getItem("passUser1");
+function sesionON(){
+    let inicio = document.getElementById("inicioSesion");
+    let registro = document.getElementById("registro");
+    let botonesIniRegis = document.getElementById("botones");
+    let emailContact = document.getElementById("emailContact");
+    emailContact.remove();
+    botonesIniRegis.remove();
+    inicio.remove();
+    registro.remove();
+
+    let botonAgregar = document.createElement("div");
+    botonAgregar.innerHTML = `<button id="btn_agregar">Agregar Producto</button>`;
+    document.getElementById("header-arriba").append(botonAgregar);
+    let btn_agregar = document.getElementById("btn_agregar");
+    btn_agregar.addEventListener("click", agregandoProducto);
+
+    let sesionIniciada = document.createElement("h4");
+    sesionIniciada.innerText = `Se inicio sesion correctamente!`
+    document.getElementById("volverArriba").append(sesionIniciada);
+}
+function verificarSession() {
+    if(sessionStorage.getItem("user1ON")){
+        sesionON();
+    }
+}
+verificarSession();
+function verificarUsuario(e) {
+    e.preventDefault();
+        if(inputSesion1.value === userUno && inputSesion2.value === passUno) {
+            sesionON();
+        } else {
+            alert(`Usuario o contraseña erronea, por favor vuelva a intentarlo.`);
+        }
+}
+let formSesion = document.getElementById("inicioForm");
+let inputSesion1 = document.getElementById("mailS");
+let inputSesion2 = document.getElementById("passS");
+formSesion.addEventListener("submit", verificarUsuario);
+
 
 function agregandoProducto() {
     let marca = prompt("Ingrese la marca del vehiculo");
@@ -103,14 +127,14 @@ function buscadorDeProductos(e){
 let input = document.getElementById("buscador");
 let busqueda = document.getElementById("form");
 busqueda.addEventListener("submit", buscadorDeProductos);
-let botoness = document.getElementById("ingresar");
-botoness.addEventListener("click", agregandoProducto);
 
-
-localStorage.setItem("autos0km", JSON.stringify(autosNuevos));
 function mostrar() {
+    if(localStorage.getItem("autos0km")) {
+        console.log("Autos0km cargados en sistema");
+    } else {
+        localStorage.setItem("autos0km", JSON.stringify(autosNuevos));
+    }
     let autosNuevosLS = JSON.parse(localStorage.getItem("autos0km"));
-
     autosNuevosLS.forEach(auto => {
         let ceros = document.createElement("div");
         ceros.innerHTML = `
@@ -124,7 +148,7 @@ function mostrar() {
                             </div>`;
         ceros.className = "ceros-card";
         document.getElementById("cero").append(ceros);
+
     })
 }
-
 mostrar();

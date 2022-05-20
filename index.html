@@ -16,8 +16,8 @@
     <title>Computadoras BB</title>
 </head> 
 <body>
-    <header class="header">
-        <div class="header-arriba">
+    <header id="header" class="header">
+        <div id="header-arriba" class="header-arriba">
             <div class="header-arriba-logo">
                 <h1>Bahia<span class="logo"> Automotores</span></h1>
             </div>
@@ -28,8 +28,10 @@
                 </form>
             </div>
             <div id="botones" class="header-arriba-botones">
-                <button id="ingresar">Ingresar</button>
-                <button>Registrar</button>
+                <ul>
+                    <li><a href="#inicioSesion">Iniciar sesion</a></li>
+                    <li><a href="#registro">Regristrate</a></li>
+                </ul>
             </div>
         </div>
         <nav class="header-nav">
@@ -68,16 +70,16 @@
                     <h4>Te gusto algun vehiculo? ¡Nosotros nos contactamos con vos!</h4>
                     <input type="text" placeholder="Nombre">
                     <input type="number" placeholder="Celular">
-                    <input type="email" placeholder="Correo Electronico">
+                    <input id="emailContact" type="email" placeholder="Correo Electronico">
                     <textarea name="" id="" cols="30" rows="10" placeholder="Algo que quieras agregar..."></textarea>
                     <input type="submit" value="Enviar">
                 </form>
             </div>
             <div id="inicioSesion">
-                <form id="InicioForm">
+                <form id="inicioForm">
                     <h4>Iniciar sesión</h3>
-                    <input type="email" placeholder="Correo Electronico">
-                    <input type="password" placeholder="Contraseña">
+                    <input type="email" placeholder="Correo Electronico" id="mailS">
+                    <input type="text" placeholder="Contraseña" id="passS">
                     <input type="submit" value="Iniciar sesión">
                 </form>
             </div>
@@ -90,6 +92,7 @@
                     <input type="submit" value="Registrar">
                 </form>
             </div>
+            <div id="volverArriba"><a href="#header">Volver para arriba</a></div>
         </section>
     </main>
 
