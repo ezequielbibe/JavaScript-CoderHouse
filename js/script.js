@@ -20,7 +20,7 @@ class Autos {
     }
 }
 
-let autosEnVenta = [];
+const autosEnVenta = [];
 const auto1 = new Autos("Volkswagen", "Gol Trend Trendline", 2021, 3500000, "Nafta", "El Gol Trend Trendline cuenta con un motor 1.6, una cilindrada de 1599cc, capacidad de tanque de 55L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", 0, "https://http2.mlstatic.com/D_NQ_NP_770031-MLA43660842672_102020-O.webp", 1);
 const auto2 = new Autos("Peugeot", "208 Feline Tiptronic", 2022, 4110000, "Nafta", "El 208 Feline Tiptronic cuenta con un motor 1.6, una cilindrada de 1587cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo.", 0, "https://http2.mlstatic.com/D_NQ_NP_801127-MLA49988347847_052022-O.webp", 2);
 const auto3 = new Autos("Fiat", "Mobi Easy Pack Top", 2021, 2150000, "Nafta", "El Mobi Easy Pack Top cuenta con un motor 1.0, una cilindrada de 999cc, capacidad de tanque de 47L, control de transmisión delantera y capacidad para 5 personas. Tambien contiene frenos ABS, airbag para conductor y pasajero y computadora abordo", 0, "https://http2.mlstatic.com/D_NQ_NP_771948-MLA49791101390_042022-O.webp", 3);
@@ -36,7 +36,7 @@ autosEnVenta.push(auto1, auto2, auto3, auto4, auto5, auto6, auto7, auto8, auto9)
 // SESION DEL USUARIO
 
 
-localStorage.setItem("user1", "coderhouse@hotmail.com");
+/* localStorage.setItem("user1", "coderhouse@hotmail.com");
 localStorage.setItem("passUser1", "coder123");
 let userUno = localStorage.getItem("user1");
 let passUno = localStorage.getItem("passUser1");
@@ -62,7 +62,7 @@ const sesionON = () => {
     
     sessionStorage.getItem("user1ON") ? console.log("Session ya iniciada") : sessionStorage.setItem("user1ON", "Si");
 }
-sessionStorage.getItem("user1ON") && sesionON();
+sessionStorage.getItem("user1ON") ? sesionON() : console.log("hola"); */
 
 const verificarUsuario = (e) => {
     e.preventDefault();
@@ -85,16 +85,25 @@ const agregandoProducto = () => {
     let precio = prompt("Ingrese el precio del vehiculo");
     let combustible = prompt("Ingrese el cumbustible del vehiculo");
     let caracteristicas = prompt("Ingrese las caracteristicas del vehiculo");
+    let kilometraje = prompt("Ingrese el kilometraje del vehiculo");
     let imagen = prompt("Ingrese la img del vehiculo");
 
-    const autoNew = new AutosNuevos(marca, nombre, anio, precio, combustible, caracteristicas, imagen, autosNuevos.length++);
+    const autoNew = new Autos(marca, nombre, anio, precio, combustible, caracteristicas, kilometraje, imagen);
     console.log(autoNew);
 
-    let agora = JSON.parse(localStorage.getItem("autos0km"));
-    agora.push(autoNew);
-    localStorage.setItem("autos0km", JSON.stringify(agora));
+    let agora;
 
-    mostrar();
+    if(autoNew.kilometraje != 0) {
+        agora = JSON.parse(localStorage.getItem("autosUsados"));
+        agora.push(autoNew);
+        localStorage.setItem("autosUsados", JSON.stringify(agora));
+        mostrarUsados();
+    } else {
+        agora = JSON.parse(localStorage.getItem("autos0km"));
+        agora.push(autoNew);
+        localStorage.setItem("autos0km", JSON.stringify(agora));
+        mostrarCeros();
+    }
 }
 
 
@@ -131,14 +140,15 @@ localStorage.getItem("autosUsados") ? console.log("Autos usados cargados en sist
 const mostrarCeros = () => {
     let autosCerosLS = JSON.parse(localStorage.getItem("autos0km"));
     autosCerosLS.forEach(auto => {
+        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen} = auto;
         let ceros = document.createElement("div");
         ceros.innerHTML = `
                             <div class="ceros-card-img">
-                                <img src="${auto.imagen}" alt="${auto.modelo}">
+                                <img src="${imagen}" alt="${modelo}">
                             </div>
                             <div class="ceros-card-text">
-                                <h3>${auto.marca} ${auto.modelo}</h3>
-                                <p>${auto.caracteristicas}</p>
+                                <h3>${marca} ${modelo}</h3>
+                                <p>${caracteristicas}</p>
                                 <button>calcular financiación</button>
                             </div>`;
         ceros.className = "ceros-card";
@@ -150,13 +160,14 @@ const mostrarUsados = () => {
     let autosUsadosLS = JSON.parse(localStorage.getItem("autosUsados"));
     autosUsadosLS.forEach(auto => {
         let usados = document.createElement("div");
+        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen} = auto;
         usados.innerHTML = `
                             <div class="usados-card-img">
-                                <img src="${auto.imagen}" alt="${auto.modelo}">
+                                <img src="${imagen}" alt="${modelo}">
                             </div>
                             <div class="usados-card-text">
-                                <h3>${auto.marca} ${auto.modelo}</h3>
-                                <p>${auto.caracteristicas}</p>
+                                <h3>${marca} ${modelo}</h3>
+                                <p>${caracteristicas}</p>
                                 <button>calcular financiación</button>
                             </div>`;
         usados.className = "usados-card";
@@ -165,3 +176,31 @@ const mostrarUsados = () => {
 }
 mostrarCeros();
 mostrarUsados();
+
+localStorage.setItem("user1", "coderhouse@hotmail.com");
+localStorage.setItem("passUser1", "coder123");
+let userUno = localStorage.getItem("user1");
+let passUno = localStorage.getItem("passUser1");
+const sesionON = () => {
+    let inicio = document.getElementById("inicioSesion");
+    let registro = document.getElementById("registro");
+    let botonesIniRegis = document.getElementById("botones");
+    let emailContact = document.getElementById("emailContact");
+    emailContact.remove();
+    botonesIniRegis.remove();
+    inicio.remove();
+    registro.remove();
+
+    let botonAgregar = document.createElement("div");
+    botonAgregar.innerHTML = `<button id="btn_agregar">Agregar Producto</button>`;
+    document.getElementById("header-arriba").append(botonAgregar);
+    let btn_agregar = document.getElementById("btn_agregar");
+    btn_agregar.addEventListener("click", agregandoProducto);
+
+    let sesionIniciada = document.createElement("h4");
+    sesionIniciada.innerText = `Se inicio sesion correctamente!`
+    document.getElementById("volverArriba").append(sesionIniciada);
+    
+    sessionStorage.getItem("user1ON") ? console.log("Session ya iniciada") : sessionStorage.setItem("user1ON", "Si");
+}
+sessionStorage.getItem("user1ON") && sesionON();
