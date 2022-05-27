@@ -28,10 +28,8 @@
                 </form>
             </div>
             <div id="botones" class="header-arriba-botones">
-                <ul>
-                    <li><a href="#inicioSesion">Iniciar sesion</a></li>
-                    <li><a href="#registro">Regristrate</a></li>
-                </ul>
+                <button id="inicioSesion" class="btn">Iniciar sesión</button>
+                <button id="registro" class="btn">Registrate</button>
             </div>
         </div>
         <nav class="header-nav">
@@ -79,24 +77,6 @@
                     <input type="submit" value="Enviar">
                 </form>
             </div>
-            <div id="inicioSesion">
-                <form id="inicioForm">
-                    <h4>Iniciar sesión</h3>
-                    <input type="email" placeholder="Correo Electronico" id="mailS">
-                    <input type="text" placeholder="Contraseña" id="passS">
-                    <input type="submit" value="Iniciar sesión">
-                </form>
-            </div>
-            <div id="registro">
-                <form id="registroForm">
-                    <h4>Registrarte</h4>
-                    <input type="text" placeholder="Nombre">
-                    <input type="password" placeholder="Contraseña">
-                    <input type="email" placeholder="Correo Electronico">
-                    <input type="submit" value="Registrar">
-                </form>
-            </div>
-            <div id="volverArriba"><a href="#inicio">Volver para arriba</a></div>
         </section>
     </main>
 
@@ -115,6 +95,7 @@
         </div>
     </footer>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/script.js"></script>
 </body>
 </html>

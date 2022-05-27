@@ -33,79 +33,72 @@ const auto9 = new Autos("Volkswagen", "UP", 2017, 1800000, "Nafta", "El volkswag
 
 autosEnVenta.push(auto1, auto2, auto3, auto4, auto5, auto6, auto7, auto8, auto9);
 
-// SESION DEL USUARIO
-
-
-/* localStorage.setItem("user1", "coderhouse@hotmail.com");
-localStorage.setItem("passUser1", "coder123");
-let userUno = localStorage.getItem("user1");
-let passUno = localStorage.getItem("passUser1");
-const sesionON = () => {
-    let inicio = document.getElementById("inicioSesion");
-    let registro = document.getElementById("registro");
-    let botonesIniRegis = document.getElementById("botones");
-    let emailContact = document.getElementById("emailContact");
-    emailContact.remove();
-    botonesIniRegis.remove();
-    inicio.remove();
-    registro.remove();
-
-    let botonAgregar = document.createElement("div");
-    botonAgregar.innerHTML = `<button id="btn_agregar">Agregar Producto</button>`;
-    document.getElementById("header-arriba").append(botonAgregar);
-    let btn_agregar = document.getElementById("btn_agregar");
-    btn_agregar.addEventListener("click", agregandoProducto);
-
-    let sesionIniciada = document.createElement("h4");
-    sesionIniciada.innerText = `Se inicio sesion correctamente!`
-    document.getElementById("volverArriba").append(sesionIniciada);
-    
-    sessionStorage.getItem("user1ON") ? console.log("Session ya iniciada") : sessionStorage.setItem("user1ON", "Si");
-}
-sessionStorage.getItem("user1ON") ? sesionON() : console.log("hola"); */
-
-const verificarUsuario = (e) => {
-    e.preventDefault();
-    (inputSesion1.value === userUno) && (inputSesion2.value === passUno) ? sesionON() : alert(`Usuario o contraseña erronea, por favor vuelva a intentarlo.`);
-}
-let formSesion = document.getElementById("inicioForm");
-let inputSesion1 = document.getElementById("mailS");
-let inputSesion2 = document.getElementById("passS");
-formSesion.addEventListener("submit", verificarUsuario);
-
-
-
 // AGREGAR UN PRODUCTO AL CATALOGO
 
 
 const agregandoProducto = () => {
-    let marca = prompt("Ingrese la marca del vehiculo");
-    let nombre = prompt("Ingrese el nombre del vehiculo");
-    let anio = prompt("Ingrese el año del vehiculo");
-    let precio = prompt("Ingrese el precio del vehiculo");
-    let combustible = prompt("Ingrese el cumbustible del vehiculo");
-    let caracteristicas = prompt("Ingrese las caracteristicas del vehiculo");
-    let kilometraje = prompt("Ingrese el kilometraje del vehiculo");
-    let imagen = prompt("Ingrese la img del vehiculo");
 
-    const autoNew = new Autos(marca, nombre, anio, precio, combustible, caracteristicas, kilometraje, imagen);
-    console.log(autoNew);
-
-    let agora;
-
-    if(autoNew.kilometraje != 0) {
-        agora = JSON.parse(localStorage.getItem("autosUsados"));
-        agora.push(autoNew);
-        localStorage.setItem("autosUsados", JSON.stringify(agora));
-        mostrarUsados();
-    } else {
-        agora = JSON.parse(localStorage.getItem("autos0km"));
-        agora.push(autoNew);
-        localStorage.setItem("autos0km", JSON.stringify(agora));
-        mostrarCeros();
-    }
+    (async () => {
+        const { value: agergarVehiculo} = await Swal.fire({
+            title: 'Agregar un vehiculo al sistema.',
+            html: '<input type="text" placeholder="Marca" class="swal2-input" id="input1">' +
+            '<input type="text" placeholder="Modelo" class="swal2-input" id="input2">'+
+            '<input type="text" placeholder="Año" class="swal2-input" id="input3">'+
+            '<input type="text" placeholder="Precio" class="swal2-input" id="input4">'+
+            '<input type="text" placeholder="Combustible" class="swal2-input" id="input5">'+
+            '<input type="text" placeholder="Caracteristicas" class="swal2-input" id="input6">'+
+            '<input type="text" placeholder="Kilometraje" class="swal2-input" id="input7">'+
+            '<input type="text" placeholder="Imagen" class="swal2-input" id="input8">',
+            confirmButtonText: 'Confirmar',
+            padding: '1rem',
+            allowOutsideClick: false,
+            allowEscapeKey: true,
+            allowEnterKey: false, 
+            confirmButton: true,
+            confirmButtonColor: '#34358d',
+            confirmButtonAriaLabel: 'Confimar',
+            preConfirm: () => {
+                return [
+                    inputForm1 = document.getElementById('input1'),
+                    inputForm2 = document.getElementById('input2'),
+                    inputForm3 = document.getElementById('input3'),
+                    inputForm4 = document.getElementById('input4'),
+                    inputForm5 = document.getElementById('input5'),
+                    inputForm6 = document.getElementById('input6'),
+                    inputForm7 = document.getElementById('input7'),
+                    inputForm8 = document.getElementById('input8')
+                ]
+            }
+        })
+        if(agergarVehiculo){
+            let agora;
+            const autoNew = new Autos(inputForm1.value, inputForm2.value, inputForm3.value, inputForm4.value, inputForm5.value, inputForm6.value, inputForm7.value, inputForm8.value);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Se agrego el vehiculo correctamente',
+              })
+            if(autoNew.kilometraje != 0) {
+                agora = JSON.parse(localStorage.getItem("autosUsados"));
+                agora.push(autoNew);
+                localStorage.setItem("autosUsados", JSON.stringify(agora));
+                mostrarUsados();
+            } else {
+                agora = JSON.parse(localStorage.getItem("autos0km"));
+                agora.push(autoNew);
+                localStorage.setItem("autos0km", JSON.stringify(agora));
+                mostrarCeros();
+            }
+        }
+    })()
 }
-
 
 // BUSCAR UN PRODUCTO DEL CATALOGO
 
@@ -196,11 +189,60 @@ const sesionON = () => {
     document.getElementById("header-arriba").append(botonAgregar);
     let btn_agregar = document.getElementById("btn_agregar");
     btn_agregar.addEventListener("click", agregandoProducto);
-
-    let sesionIniciada = document.createElement("h4");
-    sesionIniciada.innerText = `Se inicio sesion correctamente!`
-    document.getElementById("volverArriba").append(sesionIniciada);
     
     sessionStorage.getItem("user1ON") ? console.log("Session ya iniciada") : sessionStorage.setItem("user1ON", "Si");
 }
 sessionStorage.getItem("user1ON") && sesionON();
+
+
+// INICIO DE SESION
+
+
+const iniciarSesion = () => {
+    (async () => {
+        const { value: formInicio} = await Swal.fire({
+            title: 'Iniciar Sesion',
+            html: '<input type="email" placeholder="Correo electronico" class="swal2-input" id="inputSesion1">' +
+            '<input type="password" placeholder="Contraseña" class="swal2-input" id="inputSesion2">',
+            confirmButtonText: 'Confirmar',
+            padding: '1rem',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false, 
+            confirmButton: true,
+            confirmButtonColor: '#34358d',
+            cancelButton: true,
+            confirmButtonAriaLabel: 'Confimar',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            cancelButtonAriaLabel: 'Cancelar',
+            preConfirm: () => {
+                return [
+                    inputSesion1 = document.getElementById('inputSesion1'),
+                    inputSesion2 = document.getElementById('inputSesion2')
+                ]
+              }
+        })
+        if(formInicio){
+            if(inputSesion1.value === userUno && inputSesion2.value === passUno){
+                sesionON();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Sesion Iniciada correctamente',
+                  })
+            } else {
+                console.log(":D");
+            }
+        }
+    })()
+}
+const btnIniciarSesion = document.getElementById("inicioSesion");
+btnIniciarSesion.addEventListener('click', iniciarSesion);

@@ -165,10 +165,12 @@ body {
         align-items: center;
         height: 25rem;
         width: 90%;
-        border: 1px solid silver; }
+        border: 1px solid #34358d;
+        box-shadow: 8px 8px 24px 0px #42445a; }
         .main-content #cerokm .ceros-card-img {
           width: 50%;
-          height: 100%; }
+          height: 100%;
+          border-right: 1px solid #34358d; }
           .main-content #cerokm .ceros-card-img img {
             width: 100%;
             height: 100%;
@@ -181,7 +183,13 @@ body {
           flex-direction: column;
           gap: 2rem;
           justify-content: center;
-          align-items: center; }
+          align-items: center;
+          text-align: center; }
+          .main-content #cerokm .ceros-card-text h3 {
+            padding: .5rem;
+            width: 100%;
+            background-color: #34358d;
+            color: white; }
   .main-content #usadokm {
     height: auto;
     width: 100%;
@@ -204,36 +212,42 @@ body {
         font-weight: bold;
         text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6); }
     .main-content #usadokm .usados {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 40% 40%;
+      grid-template-rows: 35rem 35rem 35rem;
+      grid-template-areas: "a1 a2" "a3 a4" "a5 a6";
+      justify-items: center;
+      justify-content: space-evenly;
+      align-content: center;
       align-items: center;
       width: 100%;
       gap: 3rem; }
       .main-content #usadokm .usados-card {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 25rem;
-        width: 90%;
-        border: 1px solid silver; }
+        flex-direction: column;
+        height: 35rem;
+        width: 100%;
+        border: 1px solid #34358d;
+        box-shadow: 8px 8px 24px 0px #42445a; }
         .main-content #usadokm .usados-card-img {
-          width: 50%;
-          height: 100%; }
+          width: 100%;
+          height: 60%; }
           .main-content #usadokm .usados-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover; }
         .main-content #usadokm .usados-card-text {
-          width: 50%;
-          height: 100%;
-          padding: 5rem;
           display: flex;
           flex-direction: column;
           gap: 2rem;
           justify-content: center;
-          align-items: center; }
+          align-items: center;
+          text-align: center; }
+          .main-content #usadokm .usados-card-text h3 {
+            padding: .5rem;
+            width: 100%;
+            background-color: #34358d;
+            color: white; }
   .main-content #contacto {
     width: 100%;
     height: calc(100vh - 5rem);
