@@ -20,13 +20,25 @@ class Autos {
     }
 }
 
-let autosEnVenta;
+let autosEnVenta = [];
 const traerDatosJson = async () => {
 
     let response = await fetch("./json/autos.json");
     let data = await response.json();
 
     autosEnVenta = data;
+    let autosCero = autosEnVenta.filter((el) => el.kilometraje === 0);
+    localStorage.getItem("autos0km") ? console.log("Autos0km cargados en sistema") : localStorage.setItem("autos0km", JSON.stringify(autosCero));
+    let autosUsados = autosEnVenta.filter((el) => el.kilometraje != 0);
+    localStorage.getItem("autosUsados") ? console.log("Autos usados cargados en sistema") : localStorage.setItem("autosUsados", JSON.stringify(autosUsados));
+    mostrarCeros();
+    mostrarUsados();
+
+    let btn1 = document.getElementById("btn1");
+    btn1.addEventListener("click", ()=>{
+    console.log("hola")
+})
+
 }
 traerDatosJson();
 // AGREGAR UN PRODUCTO AL CATALOGO
@@ -121,15 +133,10 @@ busqueda.addEventListener("submit", buscadorDeProductos);
 
 // MOSTRAR PRODUCTOS
 
-let autosCero = autosEnVenta.filter((el) => el.kilometraje === 0);
-localStorage.getItem("autos0km") ? console.log("Autos0km cargados en sistema") : localStorage.setItem("autos0km", JSON.stringify(autosCero));
-let autosUsados = autosEnVenta.filter((el) => el.kilometraje != 0);
-localStorage.getItem("autosUsados") ? console.log("Autos usados cargados en sistema") : localStorage.setItem("autosUsados", JSON.stringify(autosUsados));
-
 const mostrarCeros = () => {
     let autosCerosLS = JSON.parse(localStorage.getItem("autos0km"));
     autosCerosLS.forEach(auto => {
-        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen} = auto;
+        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen, id} = auto;
         let ceros = document.createElement("div");
         ceros.innerHTML = `
                             <div class="ceros-card-img">
@@ -138,7 +145,7 @@ const mostrarCeros = () => {
                             <div class="ceros-card-text">
                                 <h3>${marca} ${modelo}</h3>
                                 <p>${caracteristicas}</p>
-                                <button>calcular financiación</button>
+                                <button id="btn${id}" class="btn">calcular financiación</button>
                             </div>`;
         ceros.className = "ceros-card";
         document.getElementById("cero").append(ceros);
@@ -149,7 +156,7 @@ const mostrarUsados = () => {
     let autosUsadosLS = JSON.parse(localStorage.getItem("autosUsados"));
     autosUsadosLS.forEach(auto => {
         let usados = document.createElement("div");
-        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen} = auto;
+        let {marca, modelo, anio, precio, combustible, caracteristicas,kilometraje, imagen, id} = auto;
         usados.innerHTML = `
                             <div class="usados-card-img">
                                 <img src="${imagen}" alt="${modelo}">
@@ -157,14 +164,12 @@ const mostrarUsados = () => {
                             <div class="usados-card-text">
                                 <h3>${marca} ${modelo}</h3>
                                 <p>${caracteristicas}</p>
-                                <button>calcular financiación</button>
+                                <button id="btn${id}" class="btn">calcular financiación</button>
                             </div>`;
         usados.className = "usados-card";
         document.getElementById("usado").append(usados);
     })
 }
-mostrarCeros();
-mostrarUsados();
 
 localStorage.setItem("user1", "coderhouse@hotmail.com");
 localStorage.setItem("passUser1", "coder123");
@@ -189,6 +194,9 @@ const sesionON = () => {
     sessionStorage.getItem("user1ON") ? console.log("Session ya iniciada") : sessionStorage.setItem("user1ON", "Si");
 }
 sessionStorage.getItem("user1ON") && sesionON();
+
+// CALCULAR FINANCIACION 
+
 
 
 // INICIO DE SESION

@@ -7,6 +7,13 @@
 body {
   font-family: 'Montserrat', sans-serif; }
 
+.btn {
+  border: none;
+  background-color: #34358d;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem; }
+
 .header {
   display: flex;
   flex-direction: column;
