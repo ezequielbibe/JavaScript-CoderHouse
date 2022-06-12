@@ -33,13 +33,9 @@ const traerDatosJson = async () => {
     localStorage.getItem("autosUsados") ? console.log("Autos usados cargados en sistema") : localStorage.setItem("autosUsados", JSON.stringify(autosUsados));
     mostrarCeros();
     mostrarUsados();
-
-    let btn1 = document.getElementById("btn1");
-    btn1.addEventListener("click", ()=>{
-    console.log("hola")
-})
-
 }
+
+
 traerDatosJson();
 // AGREGAR UN PRODUCTO AL CATALOGO
 
@@ -149,6 +145,47 @@ const mostrarCeros = () => {
                             </div>`;
         ceros.className = "ceros-card";
         document.getElementById("cero").append(ceros);
+        let btn = document.getElementById(`btn${id}`);
+        btn.addEventListener("click", ()=> {
+            (async () => {
+                const { value: calculoFin} = await Swal.fire({
+                    title: 'Calcular Financiacion.',
+                    html: ` <p>Seleccione la cantidad de cuotas.</p>
+                            <select id="select" name="select" class="swal2-input">
+                                <option value="12">12 cuotas</option>
+                                <option value="24">24 cuotas</option>
+                                <option value="36">36 cuotas</option>
+                                <option value="48">48 cuotas</option>
+                                <option value="60">60 cuotas</option>
+                                <option value="72">72 cuotas</option>
+                            </select>`,
+                    confirmButtonText: 'Confirmar',
+                    padding: '1rem',
+                    allowOutsideClick: false,
+                    allowEscapeKey: true,
+                    allowEnterKey: false, 
+                    confirmButton: true,
+                    confirmButtonColor: '#34358d',
+                    confirmButtonAriaLabel: 'Confimar',
+                    preConfirm: () => {
+                        return [
+                            inputForm1 = document.getElementById('select'),
+                        ]
+                    }
+                })
+                if(calculoFin){
+                    Swal.fire({
+                        title: 'Custom animation with Animate.css',
+                        showClass: {
+                          popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                          popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    })
+                }
+            })()
+        })
     })
 }
 
