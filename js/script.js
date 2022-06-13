@@ -11,7 +11,7 @@ class Autos {
         this.caracteristicas = caracteristicas;
         this.kilometraje = kilometraje;
         this.disponible = "Disponible";
-        this.id = autosEnVenta.length++;
+        this.id = autosEnVenta.length +1;
         this.imagen = imagen;
     }
 
@@ -76,7 +76,7 @@ const agregandoProducto = () => {
         })
         if(agergarVehiculo){
             let agora;
-            const autoNew = new Autos(inputForm1.value, inputForm2.value, inputForm3.value, inputForm4.value, inputForm5.value, inputForm6.value, inputForm7.value, inputForm8.value);
+            const autoNew = new Autos(inputForm1.value, inputForm2.value, inputForm3.value, parseInt(inputForm4.value), inputForm5.value, inputForm6.value, inputForm7.value, inputForm8.value);
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -174,15 +174,48 @@ const mostrarCeros = () => {
                     }
                 })
                 if(calculoFin){
-                    Swal.fire({
-                        title: 'Custom animation with Animate.css',
-                        showClass: {
-                          popup: 'animate__animated animate__fadeInDown'
-                        },
-                        hideClass: {
-                          popup: 'animate__animated animate__fadeOutUp'
-                        }
-                    })
+                    
+                    const mensajeFin = (interes, calculo) => {
+                        Swal.fire({
+                            title: `${marca} ${modelo}`,
+                            html: `<h3>El precio del vehiculo seleccionado es de $${precio}</h3>`+
+                                    `<p>En ${inputForm1.value} cuotas tiene un interes del ${interes}%.</p>`+
+                                    `<p>Le quedaria el precio final del vehiculo en $${precio + (precio * calculo)} en ${inputForm1.value} cuotas de $${(precio + (precio * calculo)) / inputForm1.value}</p>`,
+                            confirmButtonText: 'Confirmar',
+                            padding: '1rem',
+                            allowOutsideClick: false,
+                            allowEscapeKey: true,
+                            allowEnterKey: false, 
+                            confirmButton: true,
+                            confirmButtonColor: '#34358d',
+                            confirmButtonAriaLabel: 'Confimar'
+                        });
+                    }
+                    switch(inputForm1.value) {
+                        case '12': 
+                            mensajeFin(17, 0.17);
+                        break;
+
+                        case '24':
+                            mensajeFin(35, 0.3);
+                        break;
+
+                        case '36':
+                            mensajeFin(69, 0.69);
+                        break;
+
+                        case '48':
+                            mensajeFin(86, 0.86);
+                        break;
+
+                        case '60':
+                            mensajeFin(103, 1.03);
+                        break;
+
+                        case '72':
+                            mensajeFin(120, 1.20);
+                        break;
+                    }
                 }
             })()
         })
@@ -205,6 +238,81 @@ const mostrarUsados = () => {
                             </div>`;
         usados.className = "usados-card";
         document.getElementById("usado").append(usados);
+        
+        let btn = document.getElementById(`btn${id}`);
+        btn.addEventListener("click", ()=> {
+            (async () => {
+                const { value: calculoFin} = await Swal.fire({
+                    title: 'Calcular Financiacion.',
+                    html: ` <p>Seleccione la cantidad de cuotas.</p>
+                            <select id="select" name="select" class="swal2-input">
+                                <option value="12">12 cuotas</option>
+                                <option value="24">24 cuotas</option>
+                                <option value="36">36 cuotas</option>
+                                <option value="48">48 cuotas</option>
+                                <option value="60">60 cuotas</option>
+                                <option value="72">72 cuotas</option>
+                            </select>`,
+                    confirmButtonText: 'Confirmar',
+                    padding: '1rem',
+                    allowOutsideClick: false,
+                    allowEscapeKey: true,
+                    allowEnterKey: false, 
+                    confirmButton: true,
+                    confirmButtonColor: '#34358d',
+                    confirmButtonAriaLabel: 'Confimar',
+                    preConfirm: () => {
+                        return [
+                            inputForm1 = document.getElementById('select'),
+                        ]
+                    }
+                })
+                if(calculoFin){
+                    
+                    const mensajeFin = (interes, calculo) => {
+                        Swal.fire({
+                            title: `${marca} ${modelo}`,
+                            html: `<h3>El precio del vehiculo seleccionado es de $${precio}</h3>`+
+                                    `<p>En ${inputForm1.value} cuotas tiene un interes del ${interes}%.</p>`+
+                                    `<p>Le quedaria el precio final del vehiculo en $${precio + (precio * calculo)} en ${inputForm1.value} cuotas de $${(precio + (precio * calculo)) / inputForm1.value}</p>`,
+                            confirmButtonText: 'Confirmar',
+                            padding: '1rem',
+                            allowOutsideClick: false,
+                            allowEscapeKey: true,
+                            allowEnterKey: false, 
+                            confirmButton: true,
+                            confirmButtonColor: '#34358d',
+                            confirmButtonAriaLabel: 'Confimar'
+                        });
+                    }
+                    switch(inputForm1.value) {
+                        case '12': 
+                            mensajeFin(17, 0.17);
+                        break;
+
+                        case '24':
+                            mensajeFin(35, 0.3);
+                        break;
+
+                        case '36':
+                            mensajeFin(69, 0.69);
+                        break;
+
+                        case '48':
+                            mensajeFin(86, 0.86);
+                        break;
+
+                        case '60':
+                            mensajeFin(103, 1.03);
+                        break;
+
+                        case '72':
+                            mensajeFin(120, 1.20);
+                        break;
+                    }
+                }
+            })()
+        })
     })
 }
 
@@ -214,16 +322,14 @@ let userUno = localStorage.getItem("user1");
 let passUno = localStorage.getItem("passUser1");
 const sesionON = () => {
     let inicio = document.getElementById("inicioSesion");
-    let registro = document.getElementById("registro");
     let botonesIniRegis = document.getElementById("botones");
     let emailContact = document.getElementById("emailContact");
     emailContact.remove();
     botonesIniRegis.remove();
     inicio.remove();
-    registro.remove();
 
     let botonAgregar = document.createElement("div");
-    botonAgregar.innerHTML = `<button id="btn_agregar">Agregar Producto</button>`;
+    botonAgregar.innerHTML = `<button id="btn_agregar" class="btn">Agregar Producto</button>`;
     document.getElementById("header-arriba").append(botonAgregar);
     let btn_agregar = document.getElementById("btn_agregar");
     btn_agregar.addEventListener("click", agregandoProducto);
