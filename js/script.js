@@ -11,7 +11,7 @@ class Autos {
         this.caracteristicas = caracteristicas;
         this.kilometraje = kilometraje;
         this.disponible = "Disponible";
-        this.id = autosEnVenta.length +1;
+        this.id = JSON.parse(localStorage.getItem("autosEnVenta")).length + 1;
         this.imagen = imagen;
     }
 
@@ -28,6 +28,7 @@ const traerDatosJson = async () => {
 
     autosEnVenta = data;
     let autosCero = autosEnVenta.filter((el) => el.kilometraje === 0);
+    localStorage.getItem("autosEnVenta") ? console.log("Autos cargados en sistema") : localStorage.setItem("autosEnVenta", JSON.stringify(autosEnVenta));
     localStorage.getItem("autos0km") ? console.log("Autos0km cargados en sistema") : localStorage.setItem("autos0km", JSON.stringify(autosCero));
     let autosUsados = autosEnVenta.filter((el) => el.kilometraje != 0);
     localStorage.getItem("autosUsados") ? console.log("Autos usados cargados en sistema") : localStorage.setItem("autosUsados", JSON.stringify(autosUsados));
@@ -76,6 +77,7 @@ const agregandoProducto = () => {
         })
         if(agergarVehiculo){
             let agora;
+            let totalVehi;
             const autoNew = new Autos(inputForm1.value, inputForm2.value, inputForm3.value, parseInt(inputForm4.value), inputForm5.value, inputForm6.value, inputForm7.value, inputForm8.value);
             const Toast = Swal.mixin({
                 toast: true,
@@ -93,12 +95,19 @@ const agregandoProducto = () => {
                 agora = JSON.parse(localStorage.getItem("autosUsados"));
                 agora.push(autoNew);
                 localStorage.setItem("autosUsados", JSON.stringify(agora));
+                totalVehi = JSON.parse(localStorage.getItem("autosEnVenta"));
+                totalVehi.push(autoNew);
+                localStorage.setItem("autosEnVenta", JSON.stringify(totalVehi))
                 mostrarUsados();
             } else {
                 agora = JSON.parse(localStorage.getItem("autos0km"));
                 agora.push(autoNew);
                 localStorage.setItem("autos0km", JSON.stringify(agora));
                 mostrarCeros();
+                totalVehi = JSON.parse(localStorage.getItem("autosEnVenta"));
+                totalVehi.push(autoNew);
+                localStorage.setItem("autosEnVenta", JSON.stringify(totalVehi))
+                mostrarUsados();
             }
         }
     })()

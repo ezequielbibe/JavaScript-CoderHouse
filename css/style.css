@@ -256,26 +256,26 @@ body {
             background-color: #34358d;
             color: white; }
   .main-content #contacto {
-    width: 100%;
-    height: calc(100vh - 5rem);
-    display: grid;
-    grid-template-columns: 45% 45%;
-    grid-template-rows: 45% 45%;
-    grid-template-areas: "a1 a2" "a1 a3";
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    align-items: center; }
-    .main-content #contacto #contactamos {
-      grid-area: a1;
-      padding: 1.5rem; }
-      .main-content #contacto #contactamos input {
-        width: 80%;
-        height: 2rem; }
-    .main-content #contacto #inicioSesion {
-      grid-area: a2; }
-    .main-content #contacto #registro {
-      grid-area: a3; }
+    height: 75vh; }
+    .main-content #contacto #contactamosForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      gap: 1rem; }
+      .main-content #contacto #contactamosForm h4 {
+        color: #34358d;
+        font-size: 2rem; }
+      .main-content #contacto #contactamosForm input, .main-content #contacto #contactamosForm textarea {
+        width: 40%;
+        height: 3rem;
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 1rem; }
+      .main-content #contacto #contactamosForm textarea {
+        height: 7rem; }
 
 .footer {
   height: 5rem;
