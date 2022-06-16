@@ -256,7 +256,10 @@ body {
             background-color: #34358d;
             color: white; }
   .main-content #contacto {
-    height: 75vh; }
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     .main-content #contacto #contactamosForm {
       display: flex;
       flex-direction: column;
